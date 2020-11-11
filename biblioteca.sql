@@ -65,20 +65,20 @@ INSERT INTO Libro VALUES(1230, 'Rayuela', 'Alfaguara', 350);
 
 
 INSERT INTO Escribe VALUES(
-    SELECT ID FROM Autor WHERE Nombre = 'Juan Ignacio' AND Apellido = 'Farizano', 
-    SELECT ISBN FROM Libro WHERE Titulo = 'LOTR' AND Editorial = 'UNR', 
+    (SELECT ID FROM Autor WHERE Nombre = 'Juan Ignacio' AND Apellido = 'Farizano'), 
+    (SELECT ISBN FROM Libro WHERE Titulo = 'LOTR' AND Editorial = 'UNR'), 
     1940);
 INSERT INTO Escribe VALUES(
-    SELECT ID FROM Autor WHERE Nombre = 'Natalia' AND Apellido = 'Mellino', 
-    SELECT ISBN FROM Libro WHERE Titulo = 'Farry Potter y el misterio del recursado' AND Editorial = 'Salamandra', 
+    (SELECT ID FROM Autor WHERE Nombre = 'Natalia' AND Apellido = 'Mellino'), 
+    (SELECT ISBN FROM Libro WHERE Titulo = 'Farry Potter y el misterio del recursado' AND Editorial = 'Salamandra'), 
     2019);
 INSERT INTO Escribe VALUES(
-    SELECT ID FROM Autor WHERE Nombre = 'Agustín' AND Apellido = 'Díaz',
-    SELECT ISBN FROM Libro WHERE Titulo = 'Cómo leer un libro' AND Editorial = 'Anonymus', 
+    (SELECT ID FROM Autor WHERE Nombre = 'Agustín' AND Apellido = 'Díaz'),
+    (SELECT ISBN FROM Libro WHERE Titulo = 'Cómo leer un libro' AND Editorial = 'Anonymus'), 
     1998);
 INSERT INTO Escribe VALUES(
-    SELECT ID FROM Autor WHERE Nombre = 'Julio' AND Apellido = 'Cortázar', 
-    SELECT ISBN FROM Libro WHERE Titulo = 'Rayuela' AND Editorial = 'Alfaguara', 
+    (SELECT ID FROM Autor WHERE Nombre = 'Julio' AND Apellido = 'Cortázar'), 
+    (SELECT ISBN FROM Libro WHERE Titulo = 'Rayuela' AND Editorial = 'Alfaguara'), 
     1967);
 
 -- Ejercicio 4
