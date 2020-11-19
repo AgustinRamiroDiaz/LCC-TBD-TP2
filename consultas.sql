@@ -20,9 +20,9 @@ WHERE precio >= 600000 AND precio <= 700000;
 SELECT nombre FROM Persona
 WHERE Persona.codigo IN
                      (SELECT Cliente.codigo FROM Cliente
-                      WHERE Cliente.codigo IN
+                      WHERE Cliente.codigo NOT  IN
                                            (SELECT codigo_cliente FROM PrefiereZona
-                                            WHERE nombre_poblacion = "Santa Fe" AND nombre_zona = "Norte"));
+                                            WHERE NOT (nombre_poblacion = "Santa Fe" AND nombre_zona = "Norte")));
 
 -- d
 
@@ -31,7 +31,6 @@ JOIN Vendedor ON Persona.codigo = Vendedor.codigo
 JOIN Cliente ON Cliente.vendedor = Vendedor.codigo
 JOIN PrefiereZona ON PrefiereZona.codigo_cliente = Cliente.codigo
 WHERE PrefiereZona.nombre_zona = 'Centro' AND PrefiereZona.nombre_poblacion = 'Rosario';
-
 
 -- e
 

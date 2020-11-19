@@ -48,6 +48,7 @@ ON Autor (Apellido);
 
 
 -- Ejercicio 3
+
 INSERT INTO Autor VALUES(DEFAULT, 'Julio', 'Cortázar', 'Argentina', 'Buenos Aires');
 INSERT INTO Autor VALUES(DEFAULT, 'Abelardo', 'Castillo', 'Argentina', 'Rosario');
 INSERT INTO Autor VALUES(DEFAULT, 'Natalia', 'Mellino', 'Argentina', 'Buenos Aires');
@@ -61,7 +62,6 @@ INSERT INTO Libro VALUES(420, 'LOTR', 'UNR', 62.73);
 INSERT INTO Libro VALUES(42, 'Farry Potter y el misterio del recursado', 'Salamandra', 500);
 INSERT INTO Libro VALUES(123, 'Cómo leer un libro', 'Anonymus', 999.99);
 INSERT INTO Libro VALUES(1230, 'Rayuela', 'Alfaguara', 350);
-
 
 
 INSERT INTO Escribe VALUES(
@@ -84,6 +84,7 @@ INSERT INTO Escribe VALUES(
 -- Ejercicio 4
 
 -- a
+
 UPDATE Autor
 SET
     Residencia = 'Buenos Aires'
@@ -102,31 +103,13 @@ WHERE
 
 UPDATE Libro
 SET 
-    Precio = if (Precio <= 200, Precio * 1.2, Precio * 1.1) 
+    Precio = IF (Precio <= 200, Precio * 1.2, Precio * 1.1) 
 WHERE 
     Precio > 200 AND ISBN IN
                           (SELECT ISBN_Libro FROM Escribe 
                            WHERE ID_autor IN
                                           (SELECT ID From Autor 
                                            WHERE Nacionalidad <> 'Argentina'));
-
-
--- UPDATE Libro
--- JOIN Escribe ON Libro.ISBN = Escribe.ISBN_libro
--- JOIN Autor ON Escribe.ID_autor = Autor.ID
--- SET 
---     Libro.Precio = Libro.Precio * 1.1
--- WHERE 
---     Libro.Precio > 200 AND Autor.Nacionalidad <> 'Argentina'
-
-
--- UPDATE Libro
--- JOIN Escribe ON Libro.ISBN = Escribe.ISBN_libro
--- JOIN Autor ON Escribe.ID_autor = Autor.ID
--- SET 
---     Libro.Precio = Libro.Precio * 1.2
--- WHERE 
---     Libro.Precio <= 200 AND Autor.Nacionalidad <> 'Argentina'
 
 -- d
 
