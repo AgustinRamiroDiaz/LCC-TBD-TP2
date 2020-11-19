@@ -26,14 +26,6 @@ WHERE Persona.codigo IN
 
 -- d
 
-SELECT Distinct Persona.nombre FROM Persona, Vendedor, Cliente, PrefiereZona
-WHERE Persona.codigo = Vendedor.codigo
-AND   Cliente.vendedor = Vendedor.codigo
-AND   PrefiereZona.codigo_cliente = Cliente.codigo
-AND   PrefiereZona.nombre_zona = 'Centro' AND PrefiereZona.nombre_poblacion = 'Rosario';
-
---TODO ELEGIR ENTRE ESTAS 2
--- CAPAZ SE PUEDE MEJORAR ESTA SACANDO ALGUNOS IN
 SELECT Persona.nombre FROM Persona
 WHERE Persona.codigo IN 
     (SELECT Vendedor.codigo FROM Vendedor
@@ -45,24 +37,12 @@ WHERE Persona.codigo IN
 
 -- e
 
-SELECT Zona.nombre_zona, COUNT(Inmueble.precio), AVG(Inmueble.precio) FROM Zona, Inmueble
+SELECT Zona.nombre_zona, COUNT(*), AVG(Inmueble.precio) FROM Zona, Inmueble
 WHERE Zona.nombre_zona = Inmueble.nombre_zona AND Zona.nombre_poblacion = Inmueble.nombre_poblacion
 AND   Inmueble.nombre_poblacion = 'Rosario'
 GROUP BY Zona.nombre_zona;
 
 -- f
-
-SELECT Persona.nombre From Persona, Cliente
-WHERE Cliente.codigo = Persona.codigo
-AND NOT EXISTS
-    (SELECT * FROM Zona
-     WHERE Zona.nombre_poblacion = "Santa Fe"
-     AND Zona.nombre_zona NOT IN
-        (SELECT PrefiereZona.nombre_zona FROM PrefiereZona
-         WHERE PrefiereZona.codigo_cliente = Cliente.codigo 
-         AND   PrefiereZona.nombre_poblacion = "Santa Fe"));
-
---TODO ELEGIR ENTRE ESTAS 2
 
 SELECT Persona.nombre From Persona
 WHERE Persona.codigo IN

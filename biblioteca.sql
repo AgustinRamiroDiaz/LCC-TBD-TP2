@@ -58,19 +58,19 @@ INSERT INTO Autor VALUES(DEFAULT, 'Stephen', 'Kinga', 'Estados Unidos', 'Portlan
 INSERT INTO Autor VALUES(DEFAULT, 'Eduardo', 'Galeano', 'Uruguay', 'Montevideo');
 
 
-INSERT INTO Libro VALUES(420, 'LOTR', 'UNR', 62.73);
-INSERT INTO Libro VALUES(42, 'Farry Potter y el misterio del recursado', 'Salamandra', 500);
+INSERT INTO Libro VALUES(420, 'LOTR', 'DeBolsillo', 70);
+INSERT INTO Libro VALUES(42, 'Farry Potter y el misterio del recursado', 'UNR', 500);
 INSERT INTO Libro VALUES(123, 'Cómo leer un libro', 'Anonymus', 999.99);
 INSERT INTO Libro VALUES(1230, 'Rayuela', 'Alfaguara', 350);
-
+INSERT INTO Libro VALUES(456, 'IT', 'Penguin', 300);
 
 INSERT INTO Escribe VALUES(
     (SELECT ID FROM Autor WHERE Nombre = 'Juan Ignacio' AND Apellido = 'Farizano'), 
-    (SELECT ISBN FROM Libro WHERE Titulo = 'LOTR' AND Editorial = 'UNR'), 
+    (SELECT ISBN FROM Libro WHERE Titulo = 'LOTR' AND Editorial = 'DeBolsillo'), 
     1940);
 INSERT INTO Escribe VALUES(
     (SELECT ID FROM Autor WHERE Nombre = 'Natalia' AND Apellido = 'Mellino'), 
-    (SELECT ISBN FROM Libro WHERE Titulo = 'Farry Potter y el misterio del recursado' AND Editorial = 'Salamandra'), 
+    (SELECT ISBN FROM Libro WHERE Titulo = 'Farry Potter y el misterio del recursado' AND Editorial = 'UNR'), 
     2019);
 INSERT INTO Escribe VALUES(
     (SELECT ID FROM Autor WHERE Nombre = 'Agustín' AND Apellido = 'Díaz'),
@@ -80,6 +80,10 @@ INSERT INTO Escribe VALUES(
     (SELECT ID FROM Autor WHERE Nombre = 'Julio' AND Apellido = 'Cortázar'), 
     (SELECT ISBN FROM Libro WHERE Titulo = 'Rayuela' AND Editorial = 'Alfaguara'), 
     1967);
+INSERT INTO Escribe VALUES(
+    (SELECT ID FROM Autor WHERE Nombre = 'Stephen' AND Apellido = 'Kinga'), 
+    (SELECT ISBN FROM Libro WHERE Titulo = 'IT' AND Editorial = 'Penguin'), 
+    1986);
 
 -- Ejercicio 4
 
@@ -105,11 +109,11 @@ UPDATE Libro
 SET 
     Precio = IF (Precio <= 200, Precio * 1.2, Precio * 1.1) 
 WHERE 
-    Precio > 200 AND ISBN IN
-                          (SELECT ISBN_Libro FROM Escribe 
-                           WHERE ID_autor IN
-                                          (SELECT ID From Autor 
-                                           WHERE Nacionalidad <> 'Argentina'));
+    ISBN IN
+         (SELECT ISBN_Libro FROM Escribe 
+          WHERE ID_autor IN
+                         (SELECT ID From Autor 
+                          WHERE Nacionalidad <> 'Argentina'));
 
 -- d
 
