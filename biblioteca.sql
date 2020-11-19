@@ -102,19 +102,9 @@ WHERE
 
 UPDATE Libro
 SET 
-    Precio = Precio * 1.1
+    Precio = if (Precio <= 200, Precio * 1.2, Precio * 1.1) 
 WHERE 
     Precio > 200 AND ISBN IN
-                          (SELECT ISBN_Libro FROM Escribe 
-                           WHERE ID_autor IN
-                                          (SELECT ID From Autor 
-                                           WHERE Nacionalidad <> 'Argentina'));
-
-UPDATE Libro
-SET 
-    Precio = Precio * 1.2
-WHERE 
-    Precio <= 200 AND ISBN IN
                           (SELECT ISBN_Libro FROM Escribe 
                            WHERE ID_autor IN
                                           (SELECT ID From Autor 
